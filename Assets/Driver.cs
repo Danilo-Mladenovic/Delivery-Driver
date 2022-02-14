@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    [SerializeField] float starting_angle = -90f;
-    [SerializeField] float translation_z = 0.01f;
+    float startingAngle = -90f;
+    [SerializeField] float translationSpeed = 12f;
+    [SerializeField] float turningAngle = 256f;
 
     void Start()
     {
-        transform.Rotate(0, 0, starting_angle);
+        transform.Rotate(0, 0, startingAngle);
     }
 
     void Update()
     {
-        // transform.Rotate(0, 0, 1);
-        transform.Translate(0, translation_z, 0);
+        float rotationAngle = Input.GetAxis("Horizontal") * turningAngle * Time.deltaTime;
+        float speed = Input.GetAxis("Vertical") * translationSpeed * Time.deltaTime;
+
+        transform.Rotate(0, 0, -rotationAngle);
+        transform.Translate(0, speed, 0);
     }
 }
