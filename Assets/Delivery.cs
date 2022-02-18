@@ -5,6 +5,7 @@ using UnityEngine;
 public class Delivery : MonoBehaviour
 {
     private bool pickedPackage = false;
+    [SerializeField] float destroyTimer = 0.5f;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -15,8 +16,16 @@ public class Delivery : MonoBehaviour
     {
         if (other.tag == "Package")
         {
-            Debug.Log("Got the juice!");
-            pickedPackage = true;
+            if (!pickedPackage)
+            {
+                Debug.Log("Got the juice!");
+                pickedPackage = true;
+                Destroy(other.gameObject, destroyTimer);
+            }
+            else
+            {
+                Debug.Log("You already have the juice.");
+            }
         }
         else if (other.tag == "Drop")
         {
@@ -27,7 +36,7 @@ public class Delivery : MonoBehaviour
             }
             else
             {
-                Debug.Log("You don't have juice.");
+                Debug.Log("You don't have the juice.");
             }
 
         }
