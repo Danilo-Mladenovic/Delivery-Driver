@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    float startingAngle = -90f;
+    // float startingAngle = -90f;
     [SerializeField] float translationSpeed = 12f;
     [SerializeField] float turningAngle = 256f;
 
