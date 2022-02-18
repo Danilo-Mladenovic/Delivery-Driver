@@ -7,6 +7,16 @@ public class Delivery : MonoBehaviour
     private bool pickedPackage = false;
     [SerializeField] float destroyTimer = 0.5f;
 
+    [SerializeField] Color32 driverWithPackage = new Color32(1, 1, 1, 1);
+    [SerializeField] Color32 driverWithoutPackage = new Color32(1, 1, 1, 1);
+
+    SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("AYYO!");
@@ -20,6 +30,7 @@ public class Delivery : MonoBehaviour
             {
                 Debug.Log("Got the juice!");
                 pickedPackage = true;
+                spriteRenderer.color = driverWithPackage;
                 Destroy(other.gameObject, destroyTimer);
             }
             else
@@ -33,6 +44,7 @@ public class Delivery : MonoBehaviour
             {
                 Debug.Log("Prime delivery!");
                 pickedPackage = false;
+                spriteRenderer.color = driverWithoutPackage;
             }
             else
             {
